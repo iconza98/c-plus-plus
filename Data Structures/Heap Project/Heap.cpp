@@ -1,3 +1,17 @@
+// Ikani Samani
+// CS 2420
+// Project : Heap Project
+// Novemember 4, 2013
+//
+// I Ikani Samani have not used any code other than my own (or that in the textbook) for this project.
+// I also have not used any function or data-structure from the Standard-Template Library. 
+// I understand that any violation of this disclaimer will result in a 0 for the project.
+// ---------------------------------------------------------------------------------
+//
+// I created this test program to intialize an array and pass it to a heap class to perform
+// a sort in accending order.
+
+
 #include "Heap.h"
 #include <iostream>
 #include <iomanip>
