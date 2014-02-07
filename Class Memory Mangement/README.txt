@@ -1,3 +1,6 @@
-README
+Class Memory Mangement
 
-There is a memory leak from the Pool Destructor, I'm still on working on deleting on the rows within the pool array.
+Having issues with a memory leak when Pool calls destructor.
+Need to be able to delete all rows within the pool array.
+
+Proceed with Caution
