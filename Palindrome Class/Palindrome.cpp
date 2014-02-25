@@ -49,7 +49,7 @@ void Palindrome::findString(){
             array.push_back(*i);
     }
 }
-// lonest function
+// longest function
 // purpose: returns the longest palindrome within a given string
 // Precondtion: 'line' data memeber must not be empty
 // postcondition: a string is returned that is the longest palidrome
