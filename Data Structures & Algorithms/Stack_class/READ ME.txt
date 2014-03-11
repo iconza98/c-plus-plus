@@ -1,0 +1,6 @@
+READ ME
+
+Stack Project
+
+Written mostly in C++98 syntax. Driver is used to the template stack class
+by taking infix expressions and printing out postfix expressions.
