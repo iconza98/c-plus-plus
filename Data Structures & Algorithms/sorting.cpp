@@ -1,4 +1,8 @@
-//test.cpp
+// sorting.cpp
+// 
+// To show simple implementation to various sorting algorithms
+// including:
+//  Buble sort, insertion sort, merge sort, quicksort
 
 #include <iostream> // cout
 #include <cstdlib> // rand
@@ -29,29 +33,30 @@ void randomize(int* array, int MAX){
 // worst case: O(n^2)
 // best case: O(n)
 // average case: O(n log n)
-void quicksort(int* array, int size){
-	if(size <= 1)
-		return;
+void quicksort(int* array, int lower, int higher){
+	
+	int i = lower, j = higher;
 	// pivot index is selected at random
-	int pivot = array[rand()%size];
-
-	// indicies of the array
-	int lower = 0;
-	int higher = size - 1;
+	int pivot = array[rand()%higher];
 
 	// partition
-	while(lower < higher){
-		while(array[lower] < pivot)
-			++lower;
-		while(array[higher] > pivot)
-			--higher;
-		
-		swap(array[lower], array[higher]);
+	while(i <= j){
+		while(array[i] < pivot)
+			++i;
+		while(array[j] > pivot)
+			--j;
+		if(i<= j){
+			swap(array[i], array[j]);
+			++i;
+			--j;
+		}
 	}
 
-	// recursive step	
-	quicksort(array, lower);
-	quicksort(array, higher);
+	// recursive step
+	if(lower< j)
+		quicksort(array, lower, j);
+	if(i < higher)
+		quicksort(array, i, higher);
 
 }
 void merge(int* array, int end1, int end2){
@@ -168,10 +173,10 @@ int main()
 	// worst case: O(n^2) - already sorted
 	// best case: O(n)
 	// average case: O(n log n)
-    //randomize(array, MAX);
-    //cout<<"quicksorted"<<endl;
-    //quicksort(array, MAX);
-    //display(array, MAX);
+    randomize(array, MAX);
+    cout<<"quicksorted"<<endl;
+    quicksort(array,0, MAX);
+    display(array, MAX);
 
 
     
