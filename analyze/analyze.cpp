@@ -205,24 +205,39 @@ void check_pulses(std::vector<int>smoothData, std::vector<int>& pulses, std::vec
     
 	pulses.clear();
 	peakVector.clear();
+/*    
     for(auto iter = smoothData.begin(); iter != (smoothData.end()-2); ++iter)
     {
     	int riseCheck = *(iter + 2) - *iter;
         
     	if(riseCheck > iniFile.vt){
-    		pulses.push_back((int)distance(smoothData.begin(), iter));
+    		pulses.push_back((int)distance(smoothData.begin(), iter)); //distance calculates the iter position
     		
     		while(*iter < *(iter +1)) //find peak
     			++iter;
             
     		peakVector.push_back((int)distance(smoothData.begin(), iter));
-    		
+    		/*
     		if(pulses.back() == peakVector.back()){
     			pulses.pop_back();
     			peakVector.pop_back();
     		}
-    		
+    		s
     	}
+    }
+*/
+    for( int i = 0; i < (int)smoothData.size()-2; ++i){
+
+        int riseCheck = smoothData[i+2] - smoothData[i];
+
+        if(riseCheck > iniFile.vt){
+            pulses.push_back(smoothData[i]);
+            i +=2;
+            while(smoothData[i+2] - smoothData[i] > iniFile.vt)
+                ++i;
+
+            peakVector.push_back(smoothData[i]);
+        }
     }
     
     //check for adjacent pulses
@@ -231,7 +246,7 @@ void check_pulses(std::vector<int>smoothData, std::vector<int>& pulses, std::vec
     for(auto iter = pulses.begin(); iter != (pulses.end()); ++iter)
     {
     	// check for adjecent pulses
-    	if(*(iter+1) - *iter <= iniFile.pulse_delta){
+    	if(*(iter + 2) - *iter <= iniFile.pulse_delta){
     		//calculate distance of peak
     		int tempPos = peakVector.at(distance(pulses.begin(), iter)); // get the peakpos from 1st
     		int endPos = *(iter+1); // endPos the next pulse position
@@ -240,7 +255,7 @@ void check_pulses(std::vector<int>smoothData, std::vector<int>& pulses, std::vec
     		int check = iniFile.drop_ratio * smoothData.at(tempPos); // drop_ratio * peak
     		//cout << "check: " << check << "  peakpos: " << tempPos << "  value: " << smoothData.at(tempPos) <<endl;
     		while(tempPos < endPos){
-    			if(smoothData.at(tempPos) < check)
+    			if( smoothData.at(tempPos) < check)
     				++falseCount;
     			++tempPos;
     		}
@@ -256,4 +271,10 @@ void check_pulses(std::vector<int>smoothData, std::vector<int>& pulses, std::vec
     }
 
 }
+
+/*
+
+
+
+*/
 // Newline required for sublime compiler
